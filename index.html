@@ -16,12 +16,14 @@
     <h1>Big Mappy Boy</h1>
     <div class="container">
       <div id="map"></div>
-      <div class="stats"></div>
+      <div class="stats">
+        <div id="distance"></div>
+      </div>
     </div>
     <script src="script.js"></script>
     <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwd5-QincrhQNlmmTmJ_F3LqYyvQgs6lU&libraries=drawing&callback=initMap&v=weekly"
-    defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwd5-QincrhQNlmmTmJ_F3LqYyvQgs6lU&libraries=drawing,geometry&callback=initMap&v=weekly"
+      defer
     ></script>
   </body>
 </html>

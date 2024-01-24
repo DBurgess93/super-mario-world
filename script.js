@@ -1,6 +1,8 @@
 let poly
 let map
 
+let markers = []
+
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: { lat: -34.90294429051486, lng: 138.7020212174254 },
@@ -39,6 +41,26 @@ function initMap() {
   });
 
   drawingManager.setMap(map);
+
+  google.maps.event.addListener(drawingManager, 'overlaycomplete', function (event) {
+    if (event.type === google.maps.drawing.OverlayType.MARKER) {
+      markers.push(event.overlay);
+      if (markers.length > 1) {
+
+        const newMarker = markers[markers.length - 1];
+        const previousMarker = markers[markers.length - 2];
+
+        const position1 = markers[markers.length - 2].getPosition().toJSON();
+        const position2 = markers[markers.length - 1].getPosition().toJSON();
+        console.log('Position 1:', position1);
+        console.log('Position 2:', position2);
+
+        const distance = google.maps.geometry.spherical.computeDistanceBetween(markers[markers.length - 2].getPosition(), markers[markers.length - 1].getPosition());
+        document.getElementById('distance').innerHTML = `Distance: ${distance.toFixed(2)} meters`;
+      }
+    }
+  });
+  console.log(markers)
 }
 window.initMap = initMap;
 
@@ -133,26 +155,26 @@ window.initMap = initMap;
 //   ],
 // ];
 
-for (let i = 0; i < markers.length; i++) {
-  const currMarker = markers[i];
-  // const markerDrop = [1000, 2000, 3000, 4000, 5000, 6000]
+// for (let i = 0; i < markers.length; i++) {
+//   const currMarker = markers[i];
+//   // const markerDrop = [1000, 2000, 3000, 4000, 5000, 6000]
 
-  const marker = new google.maps.Marker({
-    position: { lat: currMarker[1], lng: currMarker[2] },
-    map,
-    title: currMarker[0],
-    icon: {
-      url: currMarker[3],
-      scaledSize: new google.maps.Size(currMarker[4], currMarker[5])
-    },
-    animation: google.maps.Animation.DROP,
-  });
+//   const marker = new google.maps.Marker({
+//     position: { lat: currMarker[1], lng: currMarker[2] },
+//     map,
+//     title: currMarker[0],
+//     icon: {
+//       url: currMarker[3],
+//       scaledSize: new google.maps.Size(currMarker[4], currMarker[5])
+//     },
+//     animation: google.maps.Animation.DROP,
+//   });
 
-  const infowindow = new google.maps.InfoWindow({
-    content: currMarker[0],
-  })
+//   const infowindow = new google.maps.InfoWindow({
+//     content: currMarker[0],
+//   })
 
-  marker.addListener("click", () => {
-    infowindow.open(map, marker);
-  });
-}
+//   marker.addListener("click", () => {
+//     infowindow.open(map, marker);
+//   });
+// }
