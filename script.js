@@ -1,16 +1,17 @@
-let poly
-let map
+let poly;
+let map;
 
-let markers = []
+let markers = [];
+let totalDistance = 0;
+
+const distancesContainer = document.getElementById('distances');
+const totalDistanceContainer = document.getElementById('totalDistances');
 
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: { lat: -34.90294429051486, lng: 138.7020212174254 },
     zoom: 18,
     mapId: '2e40f4c01b12cb97',
-    // mapTypeControl: false,
-    // fullScreenControl: false,
-    // streetViewControl: false,
   });
 
   const drawingManager = new google.maps.drawing.DrawingManager({
@@ -45,24 +46,35 @@ function initMap() {
   google.maps.event.addListener(drawingManager, 'overlaycomplete', function (event) {
     if (event.type === google.maps.drawing.OverlayType.MARKER) {
       markers.push(event.overlay);
-      if (markers.length > 1) {
 
-        const newMarker = markers[markers.length - 1];
-        const previousMarker = markers[markers.length - 2];
-
-        const position1 = markers[markers.length - 2].getPosition().toJSON();
-        const position2 = markers[markers.length - 1].getPosition().toJSON();
-        console.log('Position 1:', position1);
-        console.log('Position 2:', position2);
-
-        const distance = google.maps.geometry.spherical.computeDistanceBetween(markers[markers.length - 2].getPosition(), markers[markers.length - 1].getPosition());
-        document.getElementById('distance').innerHTML = `Distance: ${distance.toFixed(2)} meters`;
-      }
+      updateDistances();
     }
   });
-  console.log(markers)
 }
+
+function updateDistances() {
+  distancesContainer.innerHTML = '';
+  totalDistance = 0;
+
+  for (let i = 1; i < markers.length; i++) {
+    const previousMarker = markers[i - 1];
+    const currentMarker = markers[i];
+
+    const distance = google.maps.geometry.spherical.computeDistanceBetween(
+      previousMarker.getPosition(),
+      currentMarker.getPosition()
+    );
+
+    distancesContainer.innerHTML += `Distance ${i}-${i + 1}: ${distance.toFixed(2)} meters<br>`;
+
+    totalDistance += distance;
+  }
+
+  totalDistanceContainer.innerHTML = `Total Distance: ${totalDistance.toFixed(2)} meters`;
+}
+
 window.initMap = initMap;
+
 
 //   poly = new google.maps.Polyline({
 //     strokecolor: "#000000",

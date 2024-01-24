@@ -37,8 +37,10 @@ h1 {
 .stats {
   height: 80vh;
   width: 28%;
-  background-color: #fff;
+  background-color: #ffffff86;
 }
-#distance {
+#distance,
+#distances,
+#totalDistance {
   color: black;
 }
