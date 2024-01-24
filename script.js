@@ -1,12 +1,13 @@
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
-    center: { lat: 34.66817453060681, lng: 135.43063861205758 },
-    zoom: 18,
-    mapId: '8d852c5e8f97aefd',
+    center: { lat: -34.90294429051486, lng: 138.7020212174254 },
+    zoom: 16,
+    mapId: '2e40f4c01b12cb97',
     mapTypeControl: false,
     fullScreenControl: false,
     streetViewControl: false,
   });
+  // -34.90294429051486, 138.7020212174254
 
   const markers = [
     [
@@ -15,7 +16,8 @@ function initMap() {
       135.43111955414685,
       "castle.svg",
       38,
-      31
+      31,
+      1000
     ],
     [
       "Ghost House",
@@ -23,7 +25,8 @@ function initMap() {
       135.42967890659148,
       "ghosthouse.svg",
       38,
-      31
+      31,
+      2000
     ],
     [
       "Weird Hill",
@@ -31,7 +34,8 @@ function initMap() {
       135.43232245892088,
       "hills_with_eyes.svg",
       38,
-      31
+      31,
+      3000
     ],
     [
       "Pointy Boi",
@@ -39,7 +43,8 @@ function initMap() {
       135.43130168128872,
       "pointer.svg",
       38,
-      31
+      31,
+      4000
     ],
     [
       "Star lol",
@@ -47,12 +52,15 @@ function initMap() {
       135.43036814960806,
       "star.svg",
       38,
-      31
+      31,
+      5000
     ],
   ];
 
   for (let i = 0; i < markers.length; i++) {
     const currMarker = markers[i];
+    // const markerDrop = [1000, 2000, 3000, 4000, 5000, 6000]
+
     const marker = new google.maps.Marker({
       position: { lat: currMarker[1], lng: currMarker[2] },
       map,

@@ -25,6 +25,17 @@ h1 {
 .gm-style {
   color: #000000;
 }
+.container {
+  display: flex;
+  gap: 2%;
+  padding: 0 30px;
+}
 #map {
-  height: 60vh;
+  height: 80vh;
+  width: 70%;
+}
+.stats {
+  height: 80vh;
+  width: 28%;
+  background-color: #fff;
 }
