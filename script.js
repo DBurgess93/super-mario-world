@@ -10,7 +10,7 @@ const totalDistanceContainer = document.getElementById('totalDistances');
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: { lat: -34.90294429051486, lng: 138.7020212174254 },
-    zoom: 18,
+    zoom: 14,
     mapId: '2e40f4c01b12cb97',
   });
 
