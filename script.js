@@ -6,7 +6,6 @@ const distancesContainer = document.getElementById('distances');
 const totalDistanceContainer = document.getElementById('totalDistances');
 let drawingManager;
 let currentPolyline;
-// let isDrawing = false;
 
 async function initMap() {
   const { Map, MVCArray } = await google.maps.importLibrary('maps');
